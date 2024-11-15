@@ -16,6 +16,10 @@ fs.readFile("./src/components/template.html", "utf-8", (err, source) => {
             fs.writeFile(`./src/assets/sass/components/${component}.scss`, '', (err) => {
                 if (err) return console.error(`there is a problem in creating ${component}.sass`);
                 console.log(`${component} created successfuly`);
+                fs.appendFile("./src/assets/sass/components/_component.scss", `@import "${component}";\n`, (err) => {
+                    if (err) return console.error(`there is a problem in creating ${component}.sass`);
+                    console.log(`${component} created successfuly`);
+                });
                 exec(`code -r ./src/components/${component}.html`, (err) => {
                     if (err) return console.error(err);
                 });
